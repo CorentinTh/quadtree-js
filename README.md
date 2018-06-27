@@ -7,6 +7,8 @@ A powerful quadtree implementation in javascript. It can be used for nodejs or d
 
 ```bash
 npm install quadtree-js
+```
+```bash
 yarn add quadtree-js
 ```
 
