@@ -46,6 +46,110 @@ const points = [new Point(10, 10), new Point(52, 64)];
 const quadtree = new QuadTree(boundingArea, maxNodeCapacity, points);
 ```
 
+### Insert
+
+You can insert a **Point** element, an array of **Point** element, your **own element** as long as it has an **x** and a **y** property or an array of custom element.
+
+```javascript
+const point = new Point(10, 25);
+
+const pointArray = [
+    new Point(45, 22),
+    new Point(30, 60),
+    new Point(14, 12)
+];
+
+const customPoint = {
+    x: 94,
+    y: 23,
+    customField:{}
+};
+
+quadtree.insert(point);
+quadtree.insert(pointArray);
+quadtree.insert(customPoint);
+```
+
+You can add your data in a **Point** element:
+```javascript
+const myData = {
+    foo: 'bar'
+};
+
+const point = new Point(50, 50, myData);
+
+console.log(point.data.foo); // 'bar'
+```
+
+### Remove
+
+As the **insert** method, you can remove a **Point** element, an array of **Point** element, your **own element** as long as it has an **x** and a **y** property or an array of custom element.
+
+```javascript
+const point = new Point(10, 25);
+
+const pointArray = [
+    new Point(45, 22),
+    new Point(30, 60),
+    new Point(14, 12)
+];
+
+const customPoint = {
+    x: 94,
+    y: 23
+};
+
+quadtree.remove(point);
+quadtree.remove(pointArray);
+quadtree.remove(customPoint);
+```
+
+**Note**: it doesn't have to be the same object, the test is done with the coordinates.
+
+### Query
+
+Use the **query** method to get all the point within a range.
+
+
+```javascript
+// This will return all the points in the given Box
+const points = quadtree.query(new Box(10, 10, 100, 100));
+```
+
+```javascript
+// This will return all the points in the given Circle
+const points = quadtree.query(new Circle(10, 10, 100));
+```
+
+You can use a **Box** or a **Circle** as a range or even your own range element as long as it has the following methods:
+* **contains**: return true if a point is within this range, false otherwise.
+* **intersects**: return true if a **Box** intersects with this range, false otherwise.
+See [the Box definition](src/Box.js) for a good example.
+
+### Get all the point
+
+If want to retrieve all the point, you can use this method:
+
+```javascript
+const points = quadtree.getAllPoints();
+```
+
+**Note**: you may want to store your points in a side array since, it have to look trough all the child nodes.
+
+### Clear
+
+Use this method to clear the quadtree. It remove all the points and sub-nodes.
+
+```javascript
+quadtree.clear();
+```
+
+
+## Todo
+* Create proper test for the Quadtree class.
+
+Feel free to contribute or improve :)
+
 ## License
 
 This project is under the [MIT license](LICENSE).

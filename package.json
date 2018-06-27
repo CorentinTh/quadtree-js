@@ -1,6 +1,6 @@
 {
   "name": "quadtree-js",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "quadtree-js. A simple quadtree implementation for javascript (nodejs or browser with module bundler).",
   "main": "build/index.js",
   "scripts": {
