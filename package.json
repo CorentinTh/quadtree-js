@@ -1,6 +1,6 @@
 {
   "name": "js-quadtree",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "quadtree-js. A simple quadtree implementation for javascript (nodejs or browser with module bundler).",
   "main": "build/index.js",
   "scripts": {
@@ -12,7 +12,12 @@
     "type": "git",
     "url": "https://github.com/CorentinTh/quadtree-js"
   },
-  "keywords": ["quadtree", "qt", "quadtree.js", "quadtree javascript"],
+  "keywords": [
+    "quadtree",
+    "qt",
+    "quadtree.js",
+    "quadtree javascript"
+  ],
   "author": "Corentin Th <corentin.thomasset74+npm@gmail.com> (https://github.com/CorentinTh)",
   "license": "MIT",
   "devDependencies": {
