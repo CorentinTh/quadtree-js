@@ -4,7 +4,7 @@
 [![tested with jest](https://img.shields.io/badge/tested_with-jest-99424f.svg)](https://github.com/facebook/jest)
 ![npm](https://img.shields.io/npm/dw/js-quadtree.svg)
 
-# quadtree-js
+# js-quadtree
 A powerful quadtree implementation in javascript. It can be used for nodejs or directly in the browser.
 
 ## Installation
