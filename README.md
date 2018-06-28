@@ -12,10 +12,10 @@ A powerful quadtree implementation in javascript. It can be used for nodejs or d
 **Quadtree-js** can be installed using yarn or npm.
 
 ```bash
-npm install quadtree-js
+npm install js-quadtree
 ```
 ```bash
-yarn add quadtree-js
+yarn add js-quadtree
 ```
 
 And import it using the ES6 syntax:
