@@ -3,6 +3,7 @@
 [![built with gulp](https://img.shields.io/badge/gulp-built_project-eb4a4b.svg?logo=data%3Aimage%2Fpng%3Bbase64%2CiVBORw0KGgoAAAANSUhEUgAAAAYAAAAOCAMAAAA7QZ0XAAAABlBMVEUAAAD%2F%2F%2F%2Bl2Z%2FdAAAAAXRSTlMAQObYZgAAABdJREFUeAFjAAFGRjSSEQzwUgwQkjAFAAtaAD0Ls2nMAAAAAElFTkSuQmCC)](http://gulpjs.com/)
 [![tested with jest](https://img.shields.io/badge/tested_with-jest-99424f.svg)](https://github.com/facebook/jest)
 ![npm](https://img.shields.io/npm/dw/js-quadtree.svg)
+![es6](https://img.shields.io/badge/javascript-es6-green.svg)
 
 # js-quadtree
 A powerful quadtree implementation in javascript. It can be used for nodejs or directly in the browser.
