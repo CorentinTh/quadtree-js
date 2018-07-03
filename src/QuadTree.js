@@ -1,3 +1,4 @@
+
 import Box from './Box';
 
 export default class QuadTree {
@@ -88,6 +89,7 @@ export default class QuadTree {
     remove(pointOrArray){
         if(pointOrArray.constructor === Array){
             for (const point of pointOrArray) {
+                console.log(point);
                 this._remove(point);
             }
         }else {
@@ -108,7 +110,14 @@ export default class QuadTree {
         }
 
         if (!this._isDivided) {
-            this._points.splice(this._points.findIndex(aPoint => aPoint.x === point.x && aPoint.y === point.y), 1);
+            //this._points.splice(this._points.findIndex(aPoint => aPoint.x === point.x && aPoint.y === point.y), 1);
+
+            const len = this._points.length;
+            for (let i = len-1; i >= 0; i--) {
+                if(point.x === this._points[i].x && point.y === this._points[i].y){
+                    this._points.splice(i,1);
+                }
+            }
 
             return;
         }
@@ -172,15 +181,17 @@ export default class QuadTree {
             this._divide();
         }
 
-        return this._ne._insert(point)
-            || this._nw._insert(point)
-            || this._se._insert(point)
-            || this._sw._insert(point);
+        if(this._ne._insert(point)) return true;
+        if(this._nw._insert(point)) return true;
+        if(this._se._insert(point)) return true;
+        if(this._sw._insert(point)) return true;
+
+        return false;
     }
 
     /**
      * Query all the point within a range
-     * @param {(Box|Object)} range - The range to test
+     * @param {(Box|Object|Circle)} range - The range to test
      * @param {number} range.x - X coordinate of the range.
      * @param {number} range.y - Y coordinate of the range.
      * @param {number} range.w - Width of the range.

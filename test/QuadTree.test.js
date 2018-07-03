@@ -37,69 +37,10 @@ describe('Class QuadTree', () => {
         });
     });
 
+    describe('insert + getAllPoints', () => {
 
-
-});
-
-
-test('QT - 1 - Insert', () => {
-    const qt = new QuadTree(new Box(0, 0, 500, 500));
-
-    const p = new Point(10, 10);
-    qt.insert(p);
-
-    expect(qt.query(new Box(0, 0, 15, 15))).toEqual([p]);
-    expect(qt.query(new Box(0, 0, 5, 5))).toEqual([]);
+    });
 
 });
 
-test('QT - 2 - Insert in constructor', () => {
-    const p = new Point(10, 10);
 
-    const qt = new QuadTree(new Box(0, 0, 500, 500), 4, [p]);
-
-    expect(qt.query(new Box(0, 0, 15, 15))).toEqual([p]);
-    expect(qt.query(new Box(0, 0, 5, 5))).toEqual([]);
-
-});
-
-test('QT - 3 - Multiple points', () => {
-    const qt = new QuadTree(new Box(0, 0, 500, 500));
-
-    const pointsIn = [
-        new Point(50, 50),
-        new Point(75, 50),
-        new Point(50, 75),
-        new Point(100, 100)
-    ];
-
-    const pointsOut = [
-        new Point(0, 0),
-        new Point(200, 200),
-        new Point(75, 101),
-        new Point(101, 75),
-    ];
-
-    for (const point of pointsIn) {
-        qt.insert(point);
-    }
-    for (const point of pointsOut) {
-        qt.insert(point);
-    }
-
-    const res = qt.query(new Box(50, 50, 50, 50));
-
-    for (const point of pointsIn) {
-        expect(res).toContain(point);
-    }
-
-    for (const point of pointsOut) {
-        expect(res).not.toContain(point);
-    }
-
-});
-
-test('QT - 3 - Remove', () => {
-    const qt = new QuadTree(new Box(0, 0, 300, 300));
-
-});

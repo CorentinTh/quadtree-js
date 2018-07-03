@@ -1,5 +1,9 @@
 import {Box, Point, Circle} from './../build/index';
 
+function rand(max, min = 0) {
+    return Math.floor(Math.random() * (max - min)) + min;
+}
+
 describe('Class Circle', () => {
 
     describe('constructor', () => {
@@ -29,7 +33,7 @@ describe('Class Circle', () => {
     });
 
     describe('method contains', () => {
-        const x = 10, y = 20, r = 30;
+        const x = rand(1000), y = rand(1000), r = rand(1000);
         let circle;
 
         beforeEach(() => {
@@ -53,6 +57,7 @@ describe('Class Circle', () => {
                 expect(circle.contains(point)).toEqual(point.data.contained);
             });
         });
+
     });
 
     describe('method intersects', () => {
@@ -70,8 +75,11 @@ describe('Class Circle', () => {
             new Box(x, y, 12, 10, {intersect: true, description: 'is encapsulated by the circle'}),
             new Box(x, y, r * 2, r * 2, {intersect: true, description: 'encapsulate the circle'}),
             new Box(x + 8, 50, 7, 10, {intersect: true, description: 'is partially in the circle'}),
-            new Box(x + 24, y + 24, 1, 1, {intersect: false, description: 'is not inside the circle, but in the bounding box'}),
-            new Box(x , y + r, 1, 1, {intersect: true, description: 'is just inside the circle'}),
+            new Box(x + 24, y + 24, 1, 1, {
+                intersect: false,
+                description: 'is not inside the circle, but in the bounding box'
+            }),
+            new Box(x, y + r, 1, 1, {intersect: true, description: 'is just inside the circle'}),
 
         ];
 
