@@ -39,7 +39,7 @@ export default class QuadTree {
      */
     _getAllPoints(pointsList){
         if(!this._isDivided){
-            Array.prototype.push.apply(pointsList, this._points);
+            Array.prototype.push.apply(pointsList, this._points.slice());
             return;
         }
 
@@ -77,7 +77,7 @@ export default class QuadTree {
         this._sw = new QuadTree(new Box(x, y + h, w, h),     this._nodeCapacity, this._points.slice());
 
         // We empty this node points
-        this._points = [];
+        this._points.length = 0;
     }
 
     /**
@@ -172,12 +172,12 @@ export default class QuadTree {
             return false;
         }
 
-        if (this._getNodePointAmount() <= this._nodeCapacity) {
-            this._points.push(point);
-            return true;
-        }
-
         if (!this._isDivided) {
+            if (this._getNodePointAmount() <= this._nodeCapacity) {
+                this._points.push(point);
+                return true;
+            }
+
             this._divide();
         }
 
