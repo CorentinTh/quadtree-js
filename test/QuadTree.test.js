@@ -97,7 +97,7 @@ describe('Class QuadTree', () => {
         });
     });
 
-    describe('query', () => {
+    describe('query Box 1', () => {
         const xMax = 1000, yMax = 1000;
         const qt = new QuadTree(new Box(0, 0, xMax, yMax));
 
@@ -114,9 +114,9 @@ describe('Class QuadTree', () => {
         for (let i = 0; i < 100; i++) {
             const point = new Point(rand(xMax - 1, 1), rand(yMax - 1, 1));
 
-            if(zone.contains(point)){
+            if (zone.contains(point)) {
                 pointsIn.push(point);
-            }else {
+            } else {
                 pointsOut.push(point);
             }
 
@@ -130,8 +130,56 @@ describe('Class QuadTree', () => {
                 expect(results).toContainEqual(point);
             });
         }
-    })
+    });
 
+    describe('remove a single point', () => {
+        const points = [], xMax = 1000, yMax = 1000;
+        const qt = new QuadTree(new Box(0, 0, xMax, yMax));
+
+        for (let i = 0; i < 100; i++) {
+            const point = new Point(rand(xMax - 1, 1), rand(yMax - 1, 1));
+
+            points.push(point);
+            qt.insert(point);
+        }
+
+        const index = rand(points.length);
+
+        qt.remove(points[index]);
+
+        test('point is removed', () => {
+            expect(qt.getAllPoints()).not.toContainEqual(points[index]);
+        });
+
+    });
+
+
+    describe('remove an array of points', () => {
+        const points = [], xMax = 1000, yMax = 1000;
+        const qt = new QuadTree(new Box(0, 0, xMax, yMax));
+
+        for (let i = 0; i < 100; i++) {
+            const point = new Point(rand(xMax - 1, 1), rand(yMax - 1, 1));
+
+            points.push(point);
+            qt.insert(point);
+        }
+
+        const rmPoints = points.slice(0, points.length / 2);
+
+        qt.remove(rmPoints);
+
+        const allPoints = qt.getAllPoints();
+
+        for (let i = 0; i < rmPoints.length; i++) {
+            const point = rmPoints[i];
+
+            test('point is removed', () => {
+                expect(allPoints).not.toContainEqual(point);
+            });
+        }
+
+    });
 });
 
 

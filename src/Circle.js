@@ -1,3 +1,4 @@
+
 /**
  * Box Circle.
  * @class Circle
@@ -39,20 +40,11 @@ export default class Circle {
      * @returns {boolean} - True if it intersects, otherwise false.
      */
     intersects(range) {
+        const Max = (a, b) => a >= b ? a : b;
+        const Min = (a, b) => a <= b ? a : b;
 
-        let xDist = Math.abs(range.x - this.x);
-        let yDist = Math.abs(range.y - this.y);
-
-        let r = this.r;
-        let w = range.w / 2;
-        let h = range.h / 2;
-
-        if (xDist > (w + r)) return false;
-        if (yDist > (h + r)) return false;
-
-        if (xDist <= (w)) return true;
-        if (yDist <= (h)) return true;
-
-        return (this._euclideanDistancePow2(xDist, w) <= this.rPow2);
+        const dX = this.x - Max(range.x, Min(this.x, range.x + range.w));
+        const dY = this.y - Max(range.y, Min(this.y, range.y + range.h));
+        return (dX * dX + dY * dY) < (this.rPow2);
     }
 }

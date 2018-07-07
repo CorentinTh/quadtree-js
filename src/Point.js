@@ -1,3 +1,4 @@
+
 /**
  * Point class.
  * @class Point

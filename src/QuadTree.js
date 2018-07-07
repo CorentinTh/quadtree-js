@@ -1,6 +1,9 @@
-
 import Box from './Box';
 
+/**
+ * QuadTree class.
+ * @class QuadTree
+ */
 export default class QuadTree {
     /**
      * Create a new QuadTree
@@ -11,22 +14,47 @@ export default class QuadTree {
      * @param {number} points[].x - X coordinate of the point
      * @param {number} points[].y - Y coordinate of the point
      */
-    constructor(container, nodeCapacity = 4, points = []) {
+    constructor(container, nodeCapacity = 4, points = [], n) {
         this._container = container;
         this._nodeCapacity = nodeCapacity;
         this._isDivided = false;
         this._points = [];
+        this.n = (n || 0) + 1;
 
         for (let point of points) {
             this._insert(point);
         }
     }
 
+
+    getTree() {
+        return this._getTree();
+    }
+
+    _getTree() {
+
+        let tree;
+
+        if (this._isDivided) {
+            tree = {
+                ne: this._ne._getTree(),
+                nw: this._nw._getTree(),
+                se: this._se._getTree(),
+                sw: this._sw._getTree()
+            };
+
+        } else {
+            tree = this._getNodePointAmount();
+        }
+
+        return tree;
+    }
+
     /**
      * Get all the points in the QuadTree
      * @returns {(Object[]|Point[])} - An array containing all the points.
      */
-    getAllPoints(){
+    getAllPoints() {
         const pointsList = [];
         this._getAllPoints(pointsList);
         return pointsList;
@@ -37,8 +65,8 @@ export default class QuadTree {
      * @param {(Object[]|Point[])} pointsList
      * @private
      */
-    _getAllPoints(pointsList){
-        if(!this._isDivided){
+    _getAllPoints(pointsList) {
+        if (!this._isDivided) {
             Array.prototype.push.apply(pointsList, this._points.slice());
             return;
         }
@@ -71,13 +99,14 @@ export default class QuadTree {
         let h = this._container.h / 2;
 
         // Creation of the sub-nodes, and insertion of the current point
-        this._ne = new QuadTree(new Box(x + w, y, w, h),     this._nodeCapacity, this._points.slice());
-        this._nw = new QuadTree(new Box(x, y, w, h),         this._nodeCapacity, this._points.slice());
-        this._se = new QuadTree(new Box(x + w, y + h, w, h), this._nodeCapacity, this._points.slice());
-        this._sw = new QuadTree(new Box(x, y + h, w, h),     this._nodeCapacity, this._points.slice());
+        this._ne = new QuadTree(new Box(x + w, y, w, h), this._nodeCapacity, this._points.slice(), this.n);
+        this._nw = new QuadTree(new Box(x, y, w, h), this._nodeCapacity, this._points.slice(), this.n);
+        this._se = new QuadTree(new Box(x + w, y + h, w, h), this._nodeCapacity, this._points.slice(), this.n);
+        this._sw = new QuadTree(new Box(x, y + h, w, h), this._nodeCapacity, this._points.slice(), this.n);
 
         // We empty this node points
         this._points.length = 0;
+        this._points = [];
     }
 
     /**
@@ -86,13 +115,12 @@ export default class QuadTree {
      * @param {number} pointOrArray.x - X coordinate of the point
      * @param {number} pointOrArray.y - Y coordinate of the point
      */
-    remove(pointOrArray){
-        if(pointOrArray.constructor === Array){
+    remove(pointOrArray) {
+        if (pointOrArray.constructor === Array) {
             for (const point of pointOrArray) {
-                console.log(point);
                 this._remove(point);
             }
-        }else {
+        } else {
             this._remove(pointOrArray);
         }
     }
@@ -113,9 +141,9 @@ export default class QuadTree {
             //this._points.splice(this._points.findIndex(aPoint => aPoint.x === point.x && aPoint.y === point.y), 1);
 
             const len = this._points.length;
-            for (let i = len-1; i >= 0; i--) {
-                if(point.x === this._points[i].x && point.y === this._points[i].y){
-                    this._points.splice(i,1);
+            for (let i = len - 1; i >= 0; i--) {
+                if (point.x === this._points[i].x && point.y === this._points[i].y) {
+                    this._points.splice(i, 1);
                 }
             }
 
@@ -127,11 +155,10 @@ export default class QuadTree {
         this._se._remove(point);
         this._sw._remove(point);
 
-
-        if (this._ne._getNodePointAmount() === 0 &&
-            this._nw._getNodePointAmount() === 0 &&
-            this._se._getNodePointAmount() === 0 &&
-            this._sw._getNodePointAmount() === 0) {
+        if (this._ne._getNodePointAmount() === 0 && !this._ne._isDivided &&
+            this._nw._getNodePointAmount() === 0 && !this._nw._isDivided &&
+            this._se._getNodePointAmount() === 0 && !this._se._isDivided &&
+            this._sw._getNodePointAmount() === 0 && !this._sw._isDivided) {
 
             this._isDivided = false;
 
@@ -148,12 +175,12 @@ export default class QuadTree {
      * @param {number} pointOrArray.x - X coordinate of the point
      * @param {number} pointOrArray.y - Y coordinate of the point
      */
-    insert(pointOrArray){
-        if(pointOrArray.constructor === Array){
+    insert(pointOrArray) {
+        if (pointOrArray.constructor === Array) {
             for (const point of pointOrArray) {
                 this._insert(point);
             }
-        }else {
+        } else {
             this._insert(pointOrArray);
         }
     }
@@ -173,7 +200,7 @@ export default class QuadTree {
         }
 
         if (!this._isDivided) {
-            if (this._getNodePointAmount() <= this._nodeCapacity) {
+            if (this._getNodePointAmount() < this._nodeCapacity) {
                 this._points.push(point);
                 return true;
             }
@@ -181,10 +208,10 @@ export default class QuadTree {
             this._divide();
         }
 
-        if(this._ne._insert(point)) return true;
-        if(this._nw._insert(point)) return true;
-        if(this._se._insert(point)) return true;
-        if(this._sw._insert(point)) return true;
+        if (this._ne._insert(point)) return true;
+        if (this._nw._insert(point)) return true;
+        if (this._se._insert(point)) return true;
+        if (this._sw._insert(point)) return true;
 
         return false;
     }
@@ -215,13 +242,15 @@ export default class QuadTree {
             return pointsFound;
         }
 
-        Array.prototype.push.apply(pointsFound, this._points.filter((point) => range.contains(point)));
-
         if (this._isDivided) {
             this._ne._query(range, pointsFound);
             this._nw._query(range, pointsFound);
             this._se._query(range, pointsFound);
             this._sw._query(range, pointsFound);
+        } else {
+            const p = this._points.filter((point) => range.contains(point));
+
+            Array.prototype.push.apply(pointsFound, p);
         }
 
         return pointsFound;
@@ -230,7 +259,7 @@ export default class QuadTree {
     /**
      * Clear the QuadTree
      */
-    clear(){
+    clear() {
         this._points = [];
 
         delete this._ne;

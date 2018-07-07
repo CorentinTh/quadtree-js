@@ -39,10 +39,10 @@ export default class Box {
      * @returns {boolean} - True if it intersects, otherwise false.
      */
     intersects(range) {
-        return range.x <= this.x + this.w
-            && range.x + range.w >= this.x
-            && range.y <= this.y + this.h
-            && range.y + range.h >= this.y;
+        return !(range.x > this.x + this.w
+            || range.x + range.w < this.x
+            || range.y > this.y + this.h
+            || range.y + range.h < this.y);
     }
 
 }
