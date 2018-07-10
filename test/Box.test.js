@@ -1,4 +1,4 @@
-import {Box, Point, Circle} from './../build/index';
+import {Point, Box, Circle, QuadTree} from './../build/index'
 
 describe('Class Box', () => {
 

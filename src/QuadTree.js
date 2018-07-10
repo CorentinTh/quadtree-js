@@ -9,21 +9,38 @@ export default class QuadTree {
      * Create a new QuadTree
      * @constructor
      * @param {Box} container - The box on which the QuadTree will operate.
-     * @param {number} [nodeCapacity=4] - The maximum amount of points by node.
-     * @param {(Object[]|Point[])} [points] - An array of initial points to insert in the QuadTree
-     * @param {number} points[].x - X coordinate of the point
-     * @param {number} points[].y - Y coordinate of the point
+     * @param {Object} [config] - The configuration of the quadtree.
+     * @param {number} [config.capacity] - The maximum amount of points per node.
+     * @param {boolean} [config.removeEmptyNodes] - Specify if the quadtree has to remove subnodes if they are empty.
+     * @param {(Object[]|Point[])} [points] - An array of initial points to insert in the QuadTree.
+     * @param {number} points[].x - X coordinate of the point.
+     * @param {number} points[].y - Y coordinate of the point.
      */
-    constructor(container, nodeCapacity = 4, points = [], n) {
+    constructor(container, config, points = []) {
         this._container = container;
-        this._nodeCapacity = nodeCapacity;
+        this._config = this._parseConfig(config);
+
         this._isDivided = false;
         this._points = [];
-        this.n = (n || 0) + 1;
 
         for (let point of points) {
             this._insert(point);
         }
+    }
+
+    /**
+     * Parses the configuration and assigns the default values
+     * @param {Object} config - The user configuration
+     * @returns {Object}
+     * @private
+     */
+    _parseConfig(config) {
+        const defaultConfig = {
+            capacity: 4,
+            removeEmptyNodes: false
+        };
+
+        return Object.assign({}, defaultConfig, config);
     }
 
 
@@ -99,10 +116,10 @@ export default class QuadTree {
         let h = this._container.h / 2;
 
         // Creation of the sub-nodes, and insertion of the current point
-        this._ne = new QuadTree(new Box(x + w, y, w, h), this._nodeCapacity, this._points.slice(), this.n);
-        this._nw = new QuadTree(new Box(x, y, w, h), this._nodeCapacity, this._points.slice(), this.n);
-        this._se = new QuadTree(new Box(x + w, y + h, w, h), this._nodeCapacity, this._points.slice(), this.n);
-        this._sw = new QuadTree(new Box(x, y + h, w, h), this._nodeCapacity, this._points.slice(), this.n);
+        this._ne = new QuadTree(new Box(x + w, y, w, h), this._config, this._points.slice());
+        this._nw = new QuadTree(new Box(x, y, w, h), this._config, this._points.slice());
+        this._se = new QuadTree(new Box(x + w, y + h, w, h), this._config, this._points.slice());
+        this._sw = new QuadTree(new Box(x, y + h, w, h), this._config, this._points.slice());
 
         // We empty this node points
         this._points.length = 0;
@@ -155,17 +172,19 @@ export default class QuadTree {
         this._se._remove(point);
         this._sw._remove(point);
 
-        if (this._ne._getNodePointAmount() === 0 && !this._ne._isDivided &&
-            this._nw._getNodePointAmount() === 0 && !this._nw._isDivided &&
-            this._se._getNodePointAmount() === 0 && !this._se._isDivided &&
-            this._sw._getNodePointAmount() === 0 && !this._sw._isDivided) {
+        if (this._config.removeEmptyNodes) {
+            if (this._ne._getNodePointAmount() === 0 && !this._ne._isDivided &&
+                this._nw._getNodePointAmount() === 0 && !this._nw._isDivided &&
+                this._se._getNodePointAmount() === 0 && !this._se._isDivided &&
+                this._sw._getNodePointAmount() === 0 && !this._sw._isDivided) {
 
-            this._isDivided = false;
+                this._isDivided = false;
 
-            delete this._ne;
-            delete this._nw;
-            delete this._se;
-            delete this._sw;
+                delete this._ne;
+                delete this._nw;
+                delete this._se;
+                delete this._sw;
+            }
         }
     }
 
@@ -200,7 +219,7 @@ export default class QuadTree {
         }
 
         if (!this._isDivided) {
-            if (this._getNodePointAmount() < this._nodeCapacity) {
+            if (this._getNodePointAmount() < this._config.capacity) {
                 this._points.push(point);
                 return true;
             }

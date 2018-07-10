@@ -26,7 +26,7 @@ Gulp.task('build', ['clean'], function () {
             content = removeUselessImports(content, classNames);
             content = removeUselessExport(content);
 
-            return getHeader() + getExport(classNames) + content;
+            return getHeader() + content + getExport(classNames);
         }))
         .pipe(Sourcemaps.init())
         .pipe(Sourcemaps.write())
@@ -36,7 +36,7 @@ Gulp.task('build', ['clean'], function () {
 Gulp.task('default', ['build']);
 
 function getExport(classNames) {
-    return `export {${classNames.join(', ').replace(/(, )$/, '')}};\n\n`;
+    return `\n\nexport {${classNames.join(', ').replace(/(, )$/, '')}};\n\n`;
 }
 
 function getClassNames(content) {

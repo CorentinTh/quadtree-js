@@ -1,4 +1,4 @@
-import {Box, Point, Circle} from './../build/index';
+import {Point, Box, Circle, QuadTree} from './../build/index'
 
 function rand(max, min = 0) {
     return Math.floor(Math.random() * (max - min)) + min;

@@ -45,6 +45,6 @@ export default class Circle {
 
         const dX = this.x - Max(range.x, Min(this.x, range.x + range.w));
         const dY = this.y - Max(range.y, Min(this.y, range.y + range.h));
-        return (dX * dX + dY * dY) < (this.rPow2);
+        return (dX * dX + dY * dY) <= (this.rPow2);
     }
 }

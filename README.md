@@ -46,13 +46,15 @@ You can also specify the following optional parameters:
 // Create the bounding area of the quadtree
 const boundingArea = new Box(0, 0, 1000, 1000);
 
-// Specify the maximum amount of point per node (default: 4)
-const maxNodeCapacity = 4;
+const config = {
+    capacity: 10,           // Specify the maximum amount of point per node (default: 4)
+    removeEmptyNodes : true // Specify if the quadtree has to remove subnodes if they are empty (default: false).
+};
 
 // An array of point to insert directly (same as quadtree.insert(points) )
 const points = [new Point(10, 10), new Point(52, 64)];
 
-const quadtree = new QuadTree(boundingArea, maxNodeCapacity, points);
+const quadtree = new QuadTree(boundingArea, config, points);
 ```
 
 ### Insert
@@ -152,12 +154,6 @@ Use this method to clear the quadtree. It remove all the points and sub-nodes.
 ```javascript
 quadtree.clear();
 ```
-
-
-## Todo
-* Create proper test for the Quadtree class.
-
-Feel free to contribute or improve :)
 
 ## License
 
