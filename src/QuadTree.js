@@ -280,6 +280,8 @@ export default class QuadTree {
      */
     clear() {
         this._points = [];
+        
+        this._isDivided = false;
 
         delete this._ne;
         delete this._nw;
