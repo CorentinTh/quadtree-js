@@ -1,10 +1,10 @@
-import Box from './Box';
+const Box = require('./Box');
 
 /**
  * QuadTree class.
  * @class QuadTree
  */
-export default class QuadTree {
+class QuadTree {
     /**
      * Create a new QuadTree
      * @constructor
@@ -287,3 +287,5 @@ export default class QuadTree {
         delete this._sw;
     }
 }
+
+module.exports = QuadTree;
