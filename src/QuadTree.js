@@ -45,7 +45,21 @@ class QuadTree {
 
 
     getTree() {
-        return this._getTree();
+        let tree;
+
+        if (this._isDivided) {
+            tree = {
+                ne: this._ne.getTree(),
+                nw: this._nw.getTree(),
+                se: this._se.getTree(),
+                sw: this._sw.getTree()
+            };
+
+        } else {
+            tree = this._getNodePointAmount();
+        }
+
+        return tree;
     }
 
     _getTree() {
