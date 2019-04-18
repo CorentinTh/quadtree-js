@@ -1,7 +1,9 @@
 
 <p align="center">
-    <img src=".github/logo.png" alt="logo" width="600">
+    <img src=".github/logo.png" alt="logo">
 </p>
+
+--------
 
 <p align="center">
     <a href="https://www.npmjs.com/package/js-quadtree"><img src="https://img.shields.io/npm/dw/js-quadtree.svg" alt="Weekly Downloads" /></a>
