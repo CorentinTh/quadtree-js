@@ -3,7 +3,6 @@
     <img src=".github/logo.png" alt="logo">
 </p>
 
---------
 
 <p align="center">
     <a href="https://www.npmjs.com/package/js-quadtree"><img src="https://img.shields.io/npm/dw/js-quadtree.svg" alt="Weekly Downloads" /></a>
@@ -13,6 +12,8 @@
     <a href="https://www.npmjs.com/package/js-quadtree"><img src="https://img.shields.io/github/package-json/v/CorentinTh/quadtree-js.svg" alt="GitHub package.json version" /></a>
     <a href='LICENCE'><img src="https://img.shields.io/github/license/CorentinTh/quadtree-js.svg" alt="Licence Badge" /></a>
 </p>
+
+
 
 A powerful quadtree implementation in javascript. It can be used for nodejs or directly in the browser.
 
