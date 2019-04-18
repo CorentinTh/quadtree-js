@@ -1,4 +1,4 @@
-import {Point, Box, Circle, QuadTree} from './../build/index'
+const {Point, Box} = require('..');
 
 describe('Class Box', () => {
 

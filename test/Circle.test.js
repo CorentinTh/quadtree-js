@@ -1,4 +1,4 @@
-import {Point, Box, Circle, QuadTree} from './../build/index'
+const {Point, Box, Circle} = require('..');
 
 function rand(max, min = 0) {
     return Math.floor(Math.random() * (max - min)) + min;

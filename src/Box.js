@@ -2,7 +2,8 @@
  * Box class.
  * @class Box
  */
-export default class Box {
+
+class Box {
 
     /**
      * Box constructor;
@@ -46,3 +47,5 @@ export default class Box {
     }
 
 }
+
+module.exports = Box;

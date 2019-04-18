@@ -1,10 +1,10 @@
-import Box from './Box';
+const Box = require('./Box');
 
 /**
  * QuadTree class.
  * @class QuadTree
  */
-export default class QuadTree {
+class QuadTree {
     /**
      * Create a new QuadTree
      * @constructor
@@ -43,21 +43,19 @@ export default class QuadTree {
         return Object.assign({}, defaultConfig, config);
     }
 
-
+    /**
+     * Return a tree representation of the QuadTree
+     * @returns {{se: *, sw: *, ne: *, nw: *}|Number} - A tree representation of the QuadTree
+     */
     getTree() {
-        return this._getTree();
-    }
-
-    _getTree() {
-
         let tree;
 
         if (this._isDivided) {
             tree = {
-                ne: this._ne._getTree(),
-                nw: this._nw._getTree(),
-                se: this._se._getTree(),
-                sw: this._sw._getTree()
+                ne: this._ne.getTree(),
+                nw: this._nw.getTree(),
+                se: this._se.getTree(),
+                sw: this._sw.getTree()
             };
 
         } else {
@@ -230,9 +228,7 @@ export default class QuadTree {
         if (this._ne._insert(point)) return true;
         if (this._nw._insert(point)) return true;
         if (this._se._insert(point)) return true;
-        if (this._sw._insert(point)) return true;
-
-        return false;
+        return this._sw._insert(point);
     }
 
     /**
@@ -280,7 +276,6 @@ export default class QuadTree {
      */
     clear() {
         this._points = [];
-        
         this._isDivided = false;
 
         delete this._ne;
@@ -289,3 +284,6 @@ export default class QuadTree {
         delete this._sw;
     }
 }
+
+module.exports = QuadTree;
+

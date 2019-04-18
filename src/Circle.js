@@ -3,7 +3,7 @@
  * Box Circle.
  * @class Circle
  */
-export default class Circle {
+class Circle {
 
     /**
      * Circle constructor;
@@ -48,3 +48,5 @@ export default class Circle {
         return (dX * dX + dY * dY) <= (this.rPow2);
     }
 }
+
+module.exports = Circle;

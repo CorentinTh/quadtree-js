@@ -1,0 +1,28 @@
+language: node_js
+node_js:
+  - "8"
+  - "10"
+  - "11"
+
+cache: yarn
+install: yarn
+
+script:
+  - yarn lint
+  - yarn test
+
+jobs:
+  include:
+    - stage: "Coverage"
+      node_js: "10"
+      script: yarn coveralls
+
+    - stage: npm release
+      node_js: "10"
+      script: echo "Deploying to npm ..."
+      deploy:
+        provider: npm
+        api_key: $NPM_API_KEY
+        email: corentin.thomasset+npm@gmail.com
+        on:
+          tags: true

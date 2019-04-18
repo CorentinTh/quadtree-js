@@ -1,12 +1,12 @@
 {
   "name": "js-quadtree",
   "version": "1.2.0",
-  "description": "quadtree-js. A simple quadtree implementation for javascript (nodejs or browser with module bundler).",
-  "main": "build/index.js",
+  "description": "A simple quadtree implementation for javascript (nodejs or browser with module bundler).",
+  "main": "index.js",
   "scripts": {
+    "lint": "eslint ./src/ ./test/",
     "test": "jest test/",
-    "build": "gulp",
-    "prepublish": "yarn build"
+    "coveralls": "jest ./test/ --coverage --collectCoverageFrom=src/*.js --coverageReporters=text-lcov | coveralls"
   },
   "repository": {
     "type": "git",
@@ -21,15 +21,8 @@
   "author": "Corentin Th <corentin.thomasset74+npm@gmail.com> (https://github.com/CorentinTh)",
   "license": "MIT",
   "devDependencies": {
-    "babel-jest": "^23.2.0",
-    "babel-preset-env": "^1.7.0",
-    "babel-register": "^6.26.0",
-    "del": "^3.0.0",
-    "gulp": "^3.9.1",
-    "gulp-concat": "^2.6.1",
-    "gulp-eslint": "^4.0.2",
-    "gulp-insert": "^0.5.0",
-    "gulp-sourcemaps": "^2.6.4",
+    "coveralls": "^3.0.3",
+    "eslint": "^5.16.0",
     "jest": "^23.2.0"
   },
   "dependencies": {}

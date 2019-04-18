@@ -1,11 +1,20 @@
 
-[![GitHub license](https://img.shields.io/github/license/CorentinTh/quadtree-js.svg)](https://github.com/CorentinTh/quadtree-js/blob/master/LICENSE)
-[![built with gulp](https://img.shields.io/badge/gulp-built_project-eb4a4b.svg?logo=data%3Aimage%2Fpng%3Bbase64%2CiVBORw0KGgoAAAANSUhEUgAAAAYAAAAOCAMAAAA7QZ0XAAAABlBMVEUAAAD%2F%2F%2F%2Bl2Z%2FdAAAAAXRSTlMAQObYZgAAABdJREFUeAFjAAFGRjSSEQzwUgwQkjAFAAtaAD0Ls2nMAAAAAElFTkSuQmCC)](http://gulpjs.com/)
-[![tested with jest](https://img.shields.io/badge/tested_with-jest-99424f.svg)](https://github.com/facebook/jest)
-![npm](https://img.shields.io/npm/dw/js-quadtree.svg)
-![es6](https://img.shields.io/badge/javascript-es6-green.svg)
+<p align="center">
+    <img src=".github/logo.png" alt="logo">
+</p>
 
-# js-quadtree
+
+<p align="center">
+    <a href="https://www.npmjs.com/package/js-quadtree"><img src="https://img.shields.io/npm/dw/js-quadtree.svg" alt="Weekly Downloads" /></a>
+    <a href="https://travis-ci.com/CorentinTh/quadtree-js"><img src="https://travis-ci.com/CorentinTh/quadtree-js.svg?branch=master" alt="Build Status" /></a>
+    <a href='https://coveralls.io/github/CorentinTh/quadtree-js?branch=master'><img src='https://coveralls.io/repos/github/CorentinTh/quadtree-js/badge.svg?branch=master' alt='Coverage Status' /></a>
+    <a href="https://www.npmjs.com/package/js-quadtree"><img src="https://img.shields.io/bundlephobia/minzip/js-quadtree.svg" alt="npm bundle size" /></a>
+    <a href="https://www.npmjs.com/package/js-quadtree"><img src="https://img.shields.io/github/package-json/v/CorentinTh/quadtree-js.svg" alt="GitHub package.json version" /></a>
+    <a href='LICENCE'><img src="https://img.shields.io/github/license/CorentinTh/quadtree-js.svg" alt="Licence Badge" /></a>
+</p>
+
+
+
 A powerful quadtree implementation in javascript. It can be used for nodejs or directly in the browser.
 
 ## Installation
@@ -146,6 +155,35 @@ const points = quadtree.getAllPoints();
 ```
 
 **Note**: you may want to store your points in a side array since, it have to look trough all the child nodes.
+
+### Get Tree
+
+You can get the amount of points by nodes with the `getTree()` method.
+
+```javascript
+const qt = new QuadTree(new Box(0, 0, 10, 10));
+
+qt.insert(new Point(5, 5));
+qt.insert(new Point(6, 5));
+qt.insert(new Point(4, 5));
+qt.insert(new Point(3, 5));
+qt.insert(new Point(2, 5));
+qt.insert(new Point(1, 5));
+
+console.log(qt.getTree());
+
+// {
+//     ne: 2, 
+//     nw: {
+//         ne: 0, 
+//         nw: 0, 
+//         se: 3, 
+//         sw: 2
+//     }, 
+//     se: 2,
+//     sw: 3
+// }
+```
 
 ### Clear
 

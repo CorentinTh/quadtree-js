@@ -3,7 +3,7 @@
  * Point class.
  * @class Point
  */
-export default class Point {
+class Point {
 
     /**
      * Point constructor.
@@ -19,3 +19,5 @@ export default class Point {
     }
 
 }
+
+module.exports = Point;

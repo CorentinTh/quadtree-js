@@ -1,4 +1,4 @@
-import {Point, Box, Circle, QuadTree} from './../build/index'
+const {Point, Box, QuadTree} = require('..');
 
 function rand(max, min = 0) {
     return Math.floor(Math.random() * (max - min)) + min;
@@ -15,20 +15,20 @@ describe('Class QuadTree', () => {
         });
 
         test('sets optional attribute config.capacity', () => {
-            const qt = new QuadTree(new Box(0, 0, 1000, 2000), {capacity:10});
+            const qt = new QuadTree(new Box(0, 0, 1000, 2000), {capacity: 10});
 
             expect(qt._config.capacity).toEqual(10);
         });
 
         test('sets optional attribute config.removeEmptyNodes', () => {
-            const qt = new QuadTree(new Box(0, 0, 1000, 2000), {removeEmptyNodes:true});
+            const qt = new QuadTree(new Box(0, 0, 1000, 2000), {removeEmptyNodes: true});
 
             expect(qt._config.removeEmptyNodes).toBeTruthy();
         });
 
         test('sets optional attribute points', () => {
             const points = [new Point(0, 0), new Point(1, 1)];
-            const qt = new QuadTree(new Box(0, 0, 1000, 2000), {capacity:4}, points);
+            const qt = new QuadTree(new Box(0, 0, 1000, 2000), {capacity: 4}, points);
 
             expect(qt._points).toEqual(points);
         });
@@ -74,7 +74,7 @@ describe('Class QuadTree', () => {
                 const point = points[i];
 
                 test(`Point (x:${point.x}, y:${point.y}) is in the results`, () => {
-                    expect(allPoints).toContainEqual(point)
+                    expect(allPoints).toContainEqual(point);
                 });
             }
         });
@@ -102,9 +102,24 @@ describe('Class QuadTree', () => {
                 const point = points[i];
 
                 test(`Point (x:${point.x}, y:${point.y}) is in the results`, () => {
-                    expect(allPoints).toContainEqual(point)
+                    expect(allPoints).toContainEqual(point);
                 });
             }
+        });
+
+
+        describe('insert point outside of range', () => {
+            test('test with one point', () => {
+                const points = [], xMax = 1000, yMax = 1000;
+                const qt = new QuadTree(new Box(0, 0, xMax, yMax));
+
+                const point = new Point(xMax * 2, yMax * 2);
+                qt.insert(point);
+
+                const allPoints = qt.getAllPoints();
+
+                expect(allPoints).not.toContain(point);
+            });
         });
     });
 
@@ -190,6 +205,51 @@ describe('Class QuadTree', () => {
             });
         }
 
+    });
+
+
+    describe('clear', () => {
+        test('QT must be clean after clear', () => {
+            const xMax = 1000, yMax = 1000;
+            const qt = new QuadTree(new Box(0, 0, xMax, yMax));
+            const qtTest = new QuadTree(new Box(0, 0, xMax, yMax));
+
+            for (let i = 0; i < 100; i++) {
+                const point = new Point(rand(xMax - 1, 1), rand(yMax - 1, 1));
+
+                qt.insert(point);
+            }
+
+            expect(qt).not.toEqual(qtTest);
+            qt.clear();
+            expect(qt).toEqual(qtTest);
+        });
+    });
+
+
+    describe('getTree', () => {
+        test('with one point', () => {
+            const qt = new QuadTree(new Box(0, 0, 10, 10));
+
+            qt.insert(new Point(5, 5));
+
+            expect(qt.getTree()).toEqual(1);
+        });
+
+        test('with several points', () => {
+            const qt = new QuadTree(new Box(0, 0, 10, 10));
+
+            qt.insert(new Point(5, 5));
+            qt.insert(new Point(6, 5));
+            qt.insert(new Point(4, 5));
+            qt.insert(new Point(3, 5));
+            qt.insert(new Point(2, 5));
+            qt.insert(new Point(1, 5));
+
+            const result = {ne: 2, nw: {ne: 0, nw: 0, se: 3, sw: 2}, se: 2, sw: 3};
+
+            expect(qt.getTree()).toEqual(result);
+        })
     });
 });
 
