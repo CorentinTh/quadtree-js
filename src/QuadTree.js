@@ -276,7 +276,6 @@ class QuadTree {
      */
     clear() {
         this._points = [];
-
         this._isDivided = false;
 
         delete this._ne;
@@ -287,3 +286,4 @@ class QuadTree {
 }
 
 module.exports = QuadTree;
+
