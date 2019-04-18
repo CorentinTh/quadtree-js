@@ -1,9 +1,10 @@
 {
   "name": "js-quadtree",
   "version": "1.2.0",
-  "description": "quadtree-js. A simple quadtree implementation for javascript (nodejs or browser with module bundler).",
-  "main": "build/index.js",
+  "description": "A simple quadtree implementation for javascript (nodejs or browser with module bundler).",
+  "main": "index.js",
   "scripts": {
+    "lint": "eslint ./src/ ./test/",
     "test": "jest test/",
     "coveralls": "jest ./test/ --coverage --collectCoverageFrom=src/*.js --coverageReporters=text-lcov | coveralls"
   },
