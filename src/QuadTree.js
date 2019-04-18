@@ -225,9 +225,7 @@ class QuadTree {
         if (this._ne._insert(point)) return true;
         if (this._nw._insert(point)) return true;
         if (this._se._insert(point)) return true;
-        if (this._sw._insert(point)) return true;
-
-        return false;
+        return this._sw._insert(point);
     }
 
     /**
