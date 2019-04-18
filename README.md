@@ -28,10 +28,10 @@ npm install js-quadtree
 yarn add js-quadtree
 ```
 
-And import it using the ES6 syntax:
+And import :
 
 ```javascript
-import {QuadTree, Box, Point, Circle} from 'quadtree-js';
+const {QuadTree, Box, Point, Circle} = require('js-quadtree');
 
 const quadtree = new QuadTree(new Box(0, 0, 1000, 1000));
 
