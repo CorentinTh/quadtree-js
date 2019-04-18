@@ -110,7 +110,7 @@ describe('Class QuadTree', () => {
 
         describe('insert point outside of range', () => {
             test('test with one point', () => {
-                const points = [], xMax = 1000, yMax = 1000;
+                const xMax = 1000, yMax = 1000;
                 const qt = new QuadTree(new Box(0, 0, xMax, yMax));
 
                 const point = new Point(xMax * 2, yMax * 2);
