@@ -43,7 +43,10 @@ class QuadTree {
         return Object.assign({}, defaultConfig, config);
     }
 
-
+    /**
+     * Return a tree representation of the QuadTree
+     * @returns {{se: *, sw: *, ne: *, nw: *}|Number} - A tree representation of the QuadTree
+     */
     getTree() {
         let tree;
 
