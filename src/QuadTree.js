@@ -62,25 +62,6 @@ class QuadTree {
         return tree;
     }
 
-    _getTree() {
-
-        let tree;
-
-        if (this._isDivided) {
-            tree = {
-                ne: this._ne._getTree(),
-                nw: this._nw._getTree(),
-                se: this._se._getTree(),
-                sw: this._sw._getTree()
-            };
-
-        } else {
-            tree = this._getNodePointAmount();
-        }
-
-        return tree;
-    }
-
     /**
      * Get all the points in the QuadTree
      * @returns {(Object[]|Point[])} - An array containing all the points.
