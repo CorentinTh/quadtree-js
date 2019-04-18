@@ -153,6 +153,35 @@ const points = quadtree.getAllPoints();
 
 **Note**: you may want to store your points in a side array since, it have to look trough all the child nodes.
 
+### Get Tree
+
+You can get the amount of points by nodes with the `getTree()` method.
+
+```javascript
+const qt = new QuadTree(new Box(0, 0, 10, 10));
+
+qt.insert(new Point(5, 5));
+qt.insert(new Point(6, 5));
+qt.insert(new Point(4, 5));
+qt.insert(new Point(3, 5));
+qt.insert(new Point(2, 5));
+qt.insert(new Point(1, 5));
+
+console.log(qt.getTree());
+
+// {
+//     ne: 2, 
+//     nw: {
+//         ne: 0, 
+//         nw: 0, 
+//         se: 3, 
+//         sw: 2
+//     }, 
+//     se: 2,
+//     sw: 3
+// }
+```
+
 ### Clear
 
 Use this method to clear the quadtree. It remove all the points and sub-nodes.
