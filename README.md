@@ -23,8 +23,7 @@ A powerful quadtree implementation in javascript. It can be used for nodejs or d
 
 ```bash
 npm install js-quadtree
-```
-```bash
+# or
 yarn add js-quadtree
 ```
 
