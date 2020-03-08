@@ -7,9 +7,8 @@
   "browser": "dist/index.js",
   "scripts": {
     "build": "rollup -c",
-    "lint": "eslint ./src/** ",
+    "lint": "eslint ./src/**",
     "test": "jest",
-    "coverage": "jest --coverageReporters=text-lcov | coveralls",
     "prepare": "npm run build"
   },
   "files": [
@@ -32,7 +31,6 @@
     "@types/jest": "^25.1.4",
     "@typescript-eslint/eslint-plugin": "^2.22.0",
     "@typescript-eslint/parser": "^2.22.0",
-    "coveralls": "^3.0.9",
     "eslint": "^6.8.0",
     "jest": "^25.1.0",
     "rollup": "^2.0.2",

@@ -18,8 +18,10 @@ jobs:
         run: npm run lint
       - name: Unit testing
         run: npm test
-      - name: Coverage
-        run: npm run coverage
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v1.0.3
+        with:
+          token: ${{secrets.CODECOV_TOKEN}}
       - name: Deploy to npm and git tag
         uses: primer/publish@v2.0.0
         env:
