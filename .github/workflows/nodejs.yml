@@ -3,11 +3,9 @@ on: [push]
 jobs:
   build:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        node-version: 12.x
     env:
       CI: true
+      node_version: 12.x
     steps:
       - uses: actions/checkout@v1
       - name: Use Node.js ${{ matrix.NODE_VERSION }}
