@@ -9,7 +9,7 @@
     "build": "rollup -c",
     "lint": "eslint ./src/** ",
     "test": "jest",
-    "coverage": "jest | coveralls",
+    "coverage": "jest --coverageReporters=text-lcov | coveralls",
     "prepare": "npm run build"
   },
   "files": [
