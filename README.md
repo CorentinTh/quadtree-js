@@ -18,7 +18,7 @@
 A powerful quadtree implementation in javascript. It can be used for nodejs or directly in the browser.
 
 ## Installation
-
+### Node JS
 **Quadtree-js** can be installed using yarn or npm.
 
 ```bash
@@ -38,7 +38,21 @@ quadtree.insert(new Point(100, 200, {custom: 'data'}));
 
 const results = quadtree.query(new Circle(150, 150, 100));
 ```
+### Browser
 
+You can use the CDN:
+```html
+<script src="https://unpkg.com/js-quadtree"></script>
+```
+And everything is globally accessible and **prefixed with `QT`**:
+```javascript
+const quadtree = new QT.QuadTree(new QT.Box(0, 0, 1000, 1000));
+
+quadtree.insert(new QT.Point(100, 200, {custom: 'data'}));
+
+const results = quadtree.query(new QT.Circle(150, 150, 100));
+```
+ 
 ## Usage
 ### Creation
 ```javascript
