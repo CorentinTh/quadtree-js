@@ -1,0 +1,29 @@
+name: Node CI
+on: [push]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: 12.x
+    env:
+      CI: true
+    steps:
+      - uses: actions/checkout@v1
+      - name: Use Node.js ${{ matrix.NODE_VERSION }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.NODE_VERSION }}
+      - name: Install Dependencies
+        run: npm ci
+      - name: Linting
+        run: npm run lint
+      - name: Unit testing
+        run: npm test
+      - name: Coverage
+        run: npm run coverage
+      - name: Deploy to npm and git tag
+        uses: primer/publish@v2.0.0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NPM_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
