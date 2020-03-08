@@ -1,9 +1,11 @@
-
 /**
  * Point class.
  * @class Point
  */
-class Point {
+export class Point {
+    x: number;
+    y: number;
+    data: unknown;
 
     /**
      * Point constructor.
@@ -12,12 +14,10 @@ class Point {
      * @param {number} y - Y coordinate of the point.
      * @param {*} [data] - Data to store along the point.
      */
-    constructor(x, y, data) {
+    constructor(x: number, y: number, data?: unknown) {
         this.x = x;
         this.y = y;
-        if (data) this.data = data;
+        this.data = data;
     }
 
 }
-
-module.exports = Point;
