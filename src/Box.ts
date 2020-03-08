@@ -2,8 +2,15 @@
  * Box class.
  * @class Box
  */
+import {Shape} from "./Shape";
+import {Point} from "./Point";
 
-class Box {
+export class Box extends Shape {
+    readonly x: number;
+    readonly y: number;
+    readonly w: number;
+    readonly h: number;
+    readonly data: unknown;
 
     /**
      * Box constructor;
@@ -14,12 +21,14 @@ class Box {
      * @param {number} h - Height of the box.
      * @param {*} [data] - Data to store along the box.
      */
-    constructor(x, y, w, h, data) {
+    constructor(x: number, y: number, w: number, h: number, data?: unknown) {
+        super();
+
         this.x = x;
         this.y = y;
         this.w = w;
         this.h = h;
-        if (data) this.data = data;
+        this.data = data;
     }
 
     /**
@@ -27,7 +36,7 @@ class Box {
      * @param {Point|Object} point - The point to test if it is contained in the box.
      * @returns {boolean} - True if the point is contained in the box, otherwise false.
      */
-    contains(point) {
+    contains(point: Point): boolean {
         return point.x >= this.x &&
             point.x <= this.x + this.w &&
             point.y >= this.y &&
@@ -39,7 +48,7 @@ class Box {
      * @param {Box|Object} range - The box to test the intersection with.
      * @returns {boolean} - True if it intersects, otherwise false.
      */
-    intersects(range) {
+    intersects(range: Box): boolean {
         return !(range.x > this.x + this.w
             || range.x + range.w < this.x
             || range.y > this.y + this.h
@@ -47,5 +56,3 @@ class Box {
     }
 
 }
-
-module.exports = Box;
