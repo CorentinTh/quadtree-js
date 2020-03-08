@@ -1,6 +1,6 @@
-const {Point, Box, Circle} = require('..');
+import {Box, Point, Circle} from '../src';
 
-function rand(max, min = 0) {
+function rand(max: number, min = 0): number {
     return Math.floor(Math.random() * (max - min)) + min;
 }
 
@@ -34,7 +34,7 @@ describe('Class Circle', () => {
 
     describe('method contains', () => {
         const x = rand(1000), y = rand(1000), r = rand(1000);
-        let circle;
+        let circle: Circle;
 
         beforeEach(() => {
             circle = new Circle(x, y, r);
@@ -62,7 +62,7 @@ describe('Class Circle', () => {
 
     describe('method intersects', () => {
         const x = 100, y = 50, r = 25;
-        let circle;
+        let circle: Circle;
 
         beforeEach(() => {
             circle = new Circle(x, y, r);

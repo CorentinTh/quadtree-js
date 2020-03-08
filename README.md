@@ -6,8 +6,8 @@
 
 <p align="center">
     <a href="https://www.npmjs.com/package/js-quadtree"><img src="https://img.shields.io/npm/dw/js-quadtree.svg" alt="Weekly Downloads" /></a>
-    <a href="https://travis-ci.com/CorentinTh/quadtree-js"><img src="https://travis-ci.com/CorentinTh/quadtree-js.svg?branch=master" alt="Build Status" /></a>
-    <a href='https://coveralls.io/github/CorentinTh/quadtree-js?branch=master'><img src='https://coveralls.io/repos/github/CorentinTh/quadtree-js/badge.svg?branch=master' alt='Coverage Status' /></a>
+    <a href="https://github.com/CorentinTh/quadtree-js/actions?query=workflow%3A%22Node+CI%22"><img alt="GitHub Workflow Status" src="https://img.shields.io/github/workflow/status/CorentinTh/quadtree-js/Node CI"></a>
+    <a href='https://codecov.io/gh/CorentinTh/quadtree-js'><img src='https://codecov.io/gh/CorentinTh/quadtree-js/branch/master/graph/badge.svg"' alt='Coverage Status' /></a>
     <a href="https://www.npmjs.com/package/js-quadtree"><img src="https://img.shields.io/bundlephobia/minzip/js-quadtree.svg" alt="npm bundle size" /></a>
     <a href="https://www.npmjs.com/package/js-quadtree"><img src="https://img.shields.io/github/package-json/v/CorentinTh/quadtree-js.svg" alt="GitHub package.json version" /></a>
     <a href='LICENCE'><img src="https://img.shields.io/github/license/CorentinTh/quadtree-js.svg" alt="Licence Badge" /></a>
@@ -18,7 +18,7 @@
 A powerful quadtree implementation in javascript. It can be used for nodejs or directly in the browser.
 
 ## Installation
-
+### Node JS
 **Quadtree-js** can be installed using yarn or npm.
 
 ```bash
@@ -30,6 +30,9 @@ yarn add js-quadtree
 And import :
 
 ```javascript
+// EMAScript import
+import {QuadTree, Box, Point, Circle} from 'js-quadtree';
+// Or Common JS:
 const {QuadTree, Box, Point, Circle} = require('js-quadtree');
 
 const quadtree = new QuadTree(new Box(0, 0, 1000, 1000));
@@ -38,7 +41,21 @@ quadtree.insert(new Point(100, 200, {custom: 'data'}));
 
 const results = quadtree.query(new Circle(150, 150, 100));
 ```
+### Browser
 
+You can use the CDN:
+```html
+<script src="https://unpkg.com/js-quadtree"></script>
+```
+And everything is globally accessible and **prefixed with `QT`**:
+```javascript
+const quadtree = new QT.QuadTree(new QT.Box(0, 0, 1000, 1000));
+
+quadtree.insert(new QT.Point(100, 200, {custom: 'data'}));
+
+const results = quadtree.query(new QT.Circle(150, 150, 100));
+```
+ 
 ## Usage
 ### Creation
 ```javascript
@@ -191,6 +208,12 @@ Use this method to clear the quadtree. It remove all the points and sub-nodes.
 ```javascript
 quadtree.clear();
 ```
+
+## Contribute
+**Pull requests are welcome !** Feel free to contribute.
+
+## Credits
+Coded with ❤️ by [Corentin Thomasset](//corentin-thomasset.fr).
 
 ## License
 

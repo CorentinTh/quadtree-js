@@ -1,4 +1,4 @@
-const {Point} = require('..');
+import {Point} from '../src';
 
 describe('Class Point', () => {
 

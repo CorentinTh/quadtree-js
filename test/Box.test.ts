@@ -1,4 +1,4 @@
-const {Point, Box} = require('..');
+import {Box, Point} from '../src';
 
 describe('Class Box', () => {
 
@@ -32,7 +32,7 @@ describe('Class Box', () => {
         const x = 50, y = 100, w = 25, h = 30, data = 'some stuff';
         const left = x, right = x + w, top = y, bottom = y + h;
 
-        let box;
+        let box: Box;
 
         beforeEach(() => {
             box = new Box(x, y, w, h, data);
@@ -60,7 +60,7 @@ describe('Class Box', () => {
     describe('method intersects', () => {
         const x = 50, y = 100, w = 25, h = 30, data = 'some stuff';
 
-        let box;
+        let box: Box;
 
         beforeEach(() => {
             box = new Box(x, y, w, h, data);
