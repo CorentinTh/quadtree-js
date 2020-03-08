@@ -3,9 +3,9 @@
  * @class Point
  */
 export class Point {
-    x: number;
-    y: number;
-    data: unknown;
+    readonly x: number;
+    readonly y: number;
+    readonly data: unknown;
 
     /**
      * Point constructor.
