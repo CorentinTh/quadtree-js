@@ -2,15 +2,15 @@
  * Box class.
  * @class Box
  */
-import {Shape} from "./Shape";
 import {Point} from "./Point";
+import {Shape, UserCustomData} from "./types";
 
-export class Box extends Shape {
+export class Box implements Shape{
     readonly x: number;
     readonly y: number;
     readonly w: number;
     readonly h: number;
-    readonly data: unknown;
+    readonly data: UserCustomData;
 
     /**
      * Box constructor;
@@ -21,9 +21,7 @@ export class Box extends Shape {
      * @param {number} h - Height of the box.
      * @param {*} [data] - Data to store along the box.
      */
-    constructor(x: number, y: number, w: number, h: number, data?: unknown) {
-        super();
-
+    constructor(x: number, y: number, w: number, h: number, data?: UserCustomData) {
         this.x = x;
         this.y = y;
         this.w = w;
