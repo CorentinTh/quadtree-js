@@ -30,6 +30,9 @@ yarn add js-quadtree
 And import :
 
 ```javascript
+// EMAScript import
+import {QuadTree, Box, Point, Circle} from 'js-quadtree';
+// Or Common JS:
 const {QuadTree, Box, Point, Circle} = require('js-quadtree');
 
 const quadtree = new QuadTree(new Box(0, 0, 1000, 1000));
