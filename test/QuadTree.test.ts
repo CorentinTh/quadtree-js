@@ -1,60 +1,17 @@
-const {Point, Box, QuadTree} = require('..');
+import {Point, Box, QuadTree} from '../src';
 
-function rand(max, min = 0) {
+function rand(max: number, min = 0): number {
     return Math.floor(Math.random() * (max - min)) + min;
 }
 
 describe('Class QuadTree', () => {
-    describe('constructor', () => {
-
-        test('sets attribute container', () => {
-            const container = new Box(0, 0, 1000, 2000);
-            const qt = new QuadTree(container);
-
-            expect(qt._container).toEqual(container);
-        });
-
-        test('sets optional attribute config.capacity', () => {
-            const qt = new QuadTree(new Box(0, 0, 1000, 2000), {capacity: 10});
-
-            expect(qt._config.capacity).toEqual(10);
-        });
-
-        test('sets optional attribute config.removeEmptyNodes', () => {
-            const qt = new QuadTree(new Box(0, 0, 1000, 2000), {removeEmptyNodes: true});
-
-            expect(qt._config.removeEmptyNodes).toBeTruthy();
-        });
-
-        test('sets optional attribute points', () => {
-            const points = [new Point(0, 0), new Point(1, 1)];
-            const qt = new QuadTree(new Box(0, 0, 1000, 2000), {capacity: 4}, points);
-
-            expect(qt._points).toEqual(points);
-        });
-
-        test('default value config.capacity', () => {
-            const qt = new QuadTree(new Box(0, 0, 1000, 2000));
-
-            expect(qt._config.capacity).toEqual(4);
-        });
-
-        test('default value config.removeEmptyNodes', () => {
-            const qt = new QuadTree(new Box(0, 0, 1000, 2000));
-
-            expect(qt._config.removeEmptyNodes).toBeFalsy();
-        });
-
-        test('default value points', () => {
-            const qt = new QuadTree(new Box(0, 0, 1000, 2000));
-
-            expect(qt._points).toEqual([]);
-        });
-    });
 
     describe('insert + getAllPoints', () => {
         describe('insert several single points', () => {
-            const points = [], xMax = 1000, yMax = 1000;
+            const points: Point[] = [];
+            const xMax = 1000;
+            const yMax = 1000;
+
             const qt = new QuadTree(new Box(0, 0, xMax, yMax));
 
             for (let i = 0; i < 100; i++) {
@@ -81,7 +38,7 @@ describe('Class QuadTree', () => {
 
 
         describe('insert array of points', () => {
-            const points = [], xMax = 1000, yMax = 1000;
+            const points: Point[] = [], xMax = 1000, yMax = 1000;
             const qt = new QuadTree(new Box(0, 0, xMax, yMax));
 
             for (let i = 0; i < 100; i++) {
@@ -159,7 +116,7 @@ describe('Class QuadTree', () => {
     });
 
     describe('remove a single point', () => {
-        const points = [], xMax = 1000, yMax = 1000;
+        const points: Point[] = [], xMax = 1000, yMax = 1000;
         const qt = new QuadTree(new Box(0, 0, xMax, yMax));
 
         for (let i = 0; i < 100; i++) {
@@ -181,7 +138,7 @@ describe('Class QuadTree', () => {
 
 
     describe('remove an array of points', () => {
-        const points = [], xMax = 1000, yMax = 1000;
+        const points: Point[] = [], xMax = 1000, yMax = 1000;
         const qt = new QuadTree(new Box(0, 0, xMax, yMax));
 
         for (let i = 0; i < 100; i++) {
