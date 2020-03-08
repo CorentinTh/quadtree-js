@@ -208,6 +208,49 @@ describe('Class QuadTree', () => {
             expect(qt.getTree()).toEqual(result);
         })
     });
+
+
+    describe('config:removeEmptyNodes', () => {
+        test('with no points', () => {
+            const qt = new QuadTree(new Box(0, 0, 10, 10), {removeEmptyNodes: true});
+
+            const points = qt.getAllPoints();
+
+            expect(points).toHaveLength(0);
+        });
+
+        test('with one point', () => {
+            const qt = new QuadTree(new Box(0, 0, 10, 10));
+
+            const point = new Point(5, 5);
+            qt.insert(point);
+            qt.remove(point);
+
+            const points = qt.getAllPoints();
+
+            expect(points).toHaveLength(0);
+        });
+
+        describe('with all points', () => {
+            const points: Point[] = [], xMax = 1000, yMax = 1000;
+            const qt = new QuadTree(new Box(0, 0, xMax, yMax), {removeEmptyNodes: true});
+
+            for (let i = 0; i < 100; i++) {
+                const point = new Point(rand(xMax - 1, 1), rand(yMax - 1, 1));
+
+                points.push(point);
+                qt.insert(point);
+            }
+
+            qt.remove(points);
+
+            const allPoints = qt.getAllPoints();
+
+            expect(allPoints).toHaveLength(0);
+            expect(qt.getTree()).toBe(0);
+
+        });
+    });
 });
 
 
