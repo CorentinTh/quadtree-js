@@ -2,12 +2,19 @@
   "name": "js-quadtree",
   "version": "2.0.1",
   "description": "A simple quadtree implementation for javascript (nodejs or browser with module bundler).",
-  "main": "index.js",
+  "main": "dist/index.js",
+  "module": "dist/index.es.js",
+  "browser": "dist/index.js",
   "scripts": {
-    "lint": "eslint ./src/ ./test/",
-    "test": "jest test/",
-    "coveralls": "jest ./test/ --coverage --collectCoverageFrom=src/*.js --coverageReporters=text-lcov | coveralls"
+    "build": "rollup -c",
+    "lint": "eslint ./src/** ",
+    "test": "jest",
+    "coverage": "jest | coveralls",
+    "prepare": "npm run build"
   },
+  "files": [
+    "/dist/"
+  ],
   "repository": {
     "type": "git",
     "url": "https://github.com/CorentinTh/quadtree-js"
@@ -21,9 +28,18 @@
   "author": "Corentin Th <corentin.thomasset74+npm@gmail.com> (https://github.com/CorentinTh)",
   "license": "MIT",
   "devDependencies": {
-    "coveralls": "^3.0.3",
-    "eslint": "^5.16.0",
-    "jest": "^23.2.0"
+    "@rollup/plugin-typescript": "^4.0.0",
+    "@types/jest": "^25.1.4",
+    "@typescript-eslint/eslint-plugin": "^2.22.0",
+    "@typescript-eslint/parser": "^2.22.0",
+    "coveralls": "^3.0.9",
+    "eslint": "^6.8.0",
+    "jest": "^25.1.0",
+    "rollup": "^2.0.2",
+    "rollup-plugin-terser": "^5.2.0",
+    "rollup-plugin-typescript2": "^0.26.0",
+    "ts-jest": "^25.2.1",
+    "typescript": "^3.8.3"
   },
   "dependencies": {}
 }
