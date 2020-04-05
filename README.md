@@ -72,8 +72,9 @@ You can also specify the following optional parameters:
 const boundingArea = new Box(0, 0, 1000, 1000);
 
 const config = {
-    capacity: 10,           // Specify the maximum amount of point per node (default: 4)
-    removeEmptyNodes : true // Specify if the quadtree has to remove subnodes if they are empty (default: false).
+    capacity: 10,            // Specify the maximum amount of point per node (default: 4)
+    removeEmptyNodes : true, // Specify if the quadtree has to remove subnodes if they are empty (default: false).
+    maximumDepth : 5         // Specify the maximum depth of the quadtree. -1 for no limit (default: -1).
 };
 
 // An array of point to insert directly (same as quadtree.insert(points) )
