@@ -3,7 +3,8 @@ import {QuadTreeConfig, QuadTreeConfigComplete, Tree} from "./types";
 
 const defaultConfig: QuadTreeConfigComplete = {
     capacity: 4,
-    removeEmptyNodes: false
+    removeEmptyNodes: false,
+    maximumDepth: -1
 };
 
 /**
@@ -27,6 +28,7 @@ export class QuadTree {
      * @param {Object} [config] - The configuration of the quadtree.
      * @param {number} [config.capacity] - The maximum amount of points per node.
      * @param {boolean} [config.removeEmptyNodes] - Specify if the quadtree has to remove subnodes if they are empty.
+     * @param {number} [config.maximumDepth] - Specify the maximum depth of the tree.
      * @param {(Object[]|Point[])} [points] - An array of initial points to insert in the QuadTree.
      * @param {number} points[].x - X coordinate of the point.
      * @param {number} points[].y - Y coordinate of the point.
@@ -106,6 +108,9 @@ export class QuadTree {
      * @private
      */
     private divide(): void {
+        const childMaximumDepth = this.config.maximumDepth === -1 ? -1 : this.config.maximumDepth - 1;
+        const childConfig = Object.assign({}, this.config, {maximumDepth: childMaximumDepth});
+
         this.isDivided = true;
 
         const x = this.container.x;
@@ -114,10 +119,10 @@ export class QuadTree {
         const h = this.container.h / 2;
 
         // Creation of the sub-nodes, and insertion of the current point
-        this.ne = new QuadTree(new Box(x + w, y, w, h), this.config, this.points.slice());
-        this.nw = new QuadTree(new Box(x, y, w, h), this.config, this.points.slice());
-        this.se = new QuadTree(new Box(x + w, y + h, w, h), this.config, this.points.slice());
-        this.sw = new QuadTree(new Box(x, y + h, w, h), this.config, this.points.slice());
+        this.ne = new QuadTree(new Box(x + w, y, w, h), childConfig, this.points.slice());
+        this.nw = new QuadTree(new Box(x, y, w, h), childConfig, this.points.slice());
+        this.se = new QuadTree(new Box(x + w, y + h, w, h), childConfig, this.points.slice());
+        this.sw = new QuadTree(new Box(x, y + h, w, h), childConfig, this.points.slice());
 
         // We empty this node points
         this.points.length = 0;
@@ -213,20 +218,24 @@ export class QuadTree {
         if (!this.container.contains(point)) {
             return false;
         }
-
         if (!this.isDivided) {
-            if (this.getNodePointAmount() < this.config.capacity) {
+            if (this.getNodePointAmount() < this.config.capacity || this.config.maximumDepth === 0) {
                 this.points.push(point);
                 return true;
+            } else if (this.config.maximumDepth === -1 || this.config.maximumDepth > 0) {
+                this.divide();
             }
 
-            this.divide();
         }
 
-        if (this.ne.insertRecursive(point)) return true;
-        if (this.nw.insertRecursive(point)) return true;
-        if (this.se.insertRecursive(point)) return true;
-        return this.sw.insertRecursive(point);
+        if (this.isDivided) {
+            if (this.ne.insertRecursive(point)) return true;
+            if (this.nw.insertRecursive(point)) return true;
+            if (this.se.insertRecursive(point)) return true;
+            return this.sw.insertRecursive(point);
+        } else {
+            return false;
+        }
     }
 
     /**

@@ -4,6 +4,7 @@ import {Box} from "./Box";
 interface QuadTreeConfig {
     capacity?: number;
     removeEmptyNodes?: boolean;
+    maximumDepth?: number | -1;
 }
 
 interface Shape {
