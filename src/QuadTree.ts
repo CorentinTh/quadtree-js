@@ -1,5 +1,5 @@
 import {Box, Point} from './index';
-import {QuadTreeConfig, QuadTreeConfigComplete, Tree} from "./types";
+import {QuadTreeConfig, QuadTreeConfigComplete, Tree, Shape} from "./types";
 
 const defaultConfig: QuadTreeConfigComplete = {
     capacity: 4,
@@ -240,26 +240,22 @@ export class QuadTree {
 
     /**
      * Query all the point within a range
-     * @param {(Box|Object|Circle)} range - The range to test
-     * @param {number} range.x - X coordinate of the range.
-     * @param {number} range.y - Y coordinate of the range.
-     * @param {number} range.w - Width of the range.
-     * @param {number} range.h - Height of the range.
+     * @param {Shape} range - The range to test
      * @returns {(Point[]|Object[])} - The points within the range
      */
-    query(range: Box): Point[] {
+    query(range: Shape): Point[] {
         const pointsFound: Point[] = [];
         this.queryRecursive(range, pointsFound);
         return pointsFound;
     }
 
     /**
-     * @param {(Box|Object)} range
+     * @param {Shape} range
      * @param {(Point[]|Object[])} pointsFound
      * @returns {(Point[]|Object[])}
      * @private
      */
-    private queryRecursive(range: Box, pointsFound: Point[]): void {
+    private queryRecursive(range: Shape, pointsFound: Point[]): void {
         if (range.intersects(this.container)) {
             if (this.isDivided) {
                 this.ne.queryRecursive(range, pointsFound);
