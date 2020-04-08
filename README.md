@@ -219,3 +219,4 @@ Coded with ❤️ by [Corentin Thomasset](//corentin-thomasset.fr).
 ## License
 
 This project is under the [MIT license](LICENSE).
+
