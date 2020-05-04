@@ -30,6 +30,7 @@ export class QuadTree {
      * @param {number} [config.capacity] - The maximum amount of points per node.
      * @param {boolean} [config.removeEmptyNodes] - Specify if the quadtree has to remove subnodes if they are empty.
      * @param {number} [config.maximumDepth] - Specify the maximum depth of the tree.
+     * @param {function} [config.arePointsEqual] - Specify a custom method to compare point for removal.
      * @param {(Object[]|Point[])} [points] - An array of initial points to insert in the QuadTree.
      * @param {number} points[].x - X coordinate of the point.
      * @param {number} points[].y - Y coordinate of the point.
