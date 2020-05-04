@@ -1,10 +1,13 @@
 import {Point} from "./Point";
 import {Box} from "./Box";
 
+type PointsComparator = <T extends Point>(point1: T, point2: T) => boolean;
+
 interface QuadTreeConfig {
     capacity?: number;
     removeEmptyNodes?: boolean;
     maximumDepth?: number | -1;
+    arePointsEqual?: PointsComparator;
 }
 
 interface Shape {
