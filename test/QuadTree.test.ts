@@ -254,13 +254,12 @@ describe('Class QuadTree', () => {
 
     describe('config:maximumDepth', () => {
         test('with a depth of 0', () => {
-            const points: Point[] = [], xMax = 100, yMax = 100;
+            const xMax = 100, yMax = 100;
             const qt = new QuadTree(new Box(0, 0, xMax, yMax), {maximumDepth:0});
 
             for (let i = 0; i < 100; i++) {
                 const point = new Point(rand(xMax - 1, 1), rand(yMax - 1, 1));
 
-                points.push(point);
                 qt.insert(point);
             }
 
