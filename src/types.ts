@@ -7,7 +7,7 @@ interface QuadTreeConfig {
     maximumDepth?: number | -1;
 }
 
-export interface Shape {
+interface Shape {
     contains(point: Point): boolean;
 
     intersects(range: Box): boolean;
