@@ -254,13 +254,12 @@ describe('Class QuadTree', () => {
 
     describe('config:maximumDepth', () => {
         test('with a depth of 0', () => {
-            const points: Point[] = [], xMax = 100, yMax = 100;
-            const qt = new QuadTree(new Box(0, 0, xMax, yMax), {maximumDepth:0});
+            const xMax = 100, yMax = 100;
+            const qt = new QuadTree(new Box(0, 0, xMax, yMax), {maximumDepth: 0});
 
             for (let i = 0; i < 100; i++) {
                 const point = new Point(rand(xMax - 1, 1), rand(yMax - 1, 1));
 
-                points.push(point);
                 qt.insert(point);
             }
 
@@ -277,9 +276,85 @@ describe('Class QuadTree', () => {
             qt.insert(new Point(2, 5));
             qt.insert(new Point(1, 5));
 
-            expect(qt.getTree()).toEqual({ ne: 2, nw: 5, se: 2, sw: 3 });
+            expect(qt.getTree()).toEqual({ne: 2, nw: 5, se: 2, sw: 3});
         });
     });
 
+    describe('config:arePointsEqual', () => {
+        test('with default value', () => {
+            const points: Point[] = [];
+            const xMax = 100
+            const yMax = 100;
+            const qt = new QuadTree(new Box(0, 0, xMax, yMax));
+
+            points.push(new Point(1, 1))
+            points.push(new Point(1, 2))
+            points.push(new Point(2, 1))
+            points.push(new Point(2, 2))
+
+            qt.insert(points);
+            qt.remove(new Point(1, 1))
+
+            expect(qt.getAllPoints()).toEqual([... points.slice(1, 4)]);
+        });
+
+        test('with method that return always false', () => {
+            const points: Point[] = [];
+            const xMax = 100
+            const yMax = 100;
+            const qt = new QuadTree(new Box(0, 0, xMax, yMax),{
+                arePointsEqual: (): boolean => false
+            });
+
+            points.push(new Point(1, 1))
+            points.push(new Point(1, 2))
+            points.push(new Point(2, 1))
+            points.push(new Point(2, 2))
+
+            qt.insert(points);
+            qt.remove(new Point(1, 1))
+            qt.remove(new Point(1, 2))
+
+            expect(qt.getAllPoints()).toEqual(points);
+        });
+
+        test('with method that return always true', () => {
+            const points: Point[] = [];
+            const xMax = 100
+            const yMax = 100;
+            const qt = new QuadTree(new Box(0, 0, xMax, yMax),{
+                arePointsEqual: (): boolean => true
+            });
+
+            points.push(new Point(1, 1))
+            points.push(new Point(1, 2))
+            points.push(new Point(2, 1))
+            points.push(new Point(2, 2))
+
+            qt.insert(points);
+            qt.remove(new Point(1, 1))
+
+            expect(qt.getAllPoints()).toHaveLength(0);
+        });
+
+        test('with method that checks from custom id', () => {
+            const points: Point[] = [];
+            const xMax = 100
+            const yMax = 100;
+            const qt = new QuadTree(new Box(0, 0, xMax, yMax),{
+                arePointsEqual: (point1: Point, point2: Point): boolean => point1.data === point2.data
+            });
+
+            points.push(new Point(1, 1, 'foo'))
+            points.push(new Point(1, 2, 'foo'))
+            points.push(new Point(2, 1, 'bar'))
+            points.push(new Point(2, 2, 'baz'))
+
+            qt.insert(points);
+            qt.remove(new Point(10, 10, 'foo'))
+
+            expect(qt.getAllPoints()).toEqual([... points.slice(2, 4)]);
+        });
+    });
 });
 
