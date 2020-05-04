@@ -13,9 +13,7 @@ interface Shape {
     intersects(range: Box): boolean;
 }
 
-type DeepRequired<T> = {
-    [P in keyof Required<T>]: T[P] extends object ? DeepRequired<T[P]> : NonNullable<Required<T[P]>>
-}
+type DeepRequired<T> = T extends Function ? T : (T extends object ? { [P in keyof Required<T>]: DeepRequired<T[P]>; } : NonNullable<Required<T>>);
 
 type QuadTreeConfigComplete = DeepRequired<QuadTreeConfig>;
 
