@@ -4,7 +4,8 @@ import {QuadTreeConfig, QuadTreeConfigComplete, Tree, Shape} from "./types";
 const defaultConfig: QuadTreeConfigComplete = {
     capacity: 4,
     removeEmptyNodes: false,
-    maximumDepth: -1
+    maximumDepth: -1,
+    arePointsEqual: (point1: Point, point2: Point) => point1.x === point2.x && point1.y === point2.y
 };
 
 /**
@@ -160,7 +161,7 @@ export class QuadTree {
         if (!this.isDivided) {
             const len = this.points.length;
             for (let i = len - 1; i >= 0; i--) {
-                if (point.x === this.points[i].x && point.y === this.points[i].y) {
+                if (this.config.arePointsEqual(point, this.points[i])) {
                     this.points.splice(i, 1);
                 }
             }

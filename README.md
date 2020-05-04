@@ -73,8 +73,10 @@ const boundingArea = new Box(0, 0, 1000, 1000);
 
 const config = {
     capacity: 10,            // Specify the maximum amount of point per node (default: 4)
-    removeEmptyNodes : true, // Specify if the quadtree has to remove subnodes if they are empty (default: false).
-    maximumDepth : 5         // Specify the maximum depth of the quadtree. -1 for no limit (default: -1).
+    removeEmptyNodes: true,  // Specify if the quadtree has to remove subnodes if they are empty (default: false).
+    maximumDepth: 5,         // Specify the maximum depth of the quadtree. -1 for no limit (default: -1).
+    // Specify a custom method to compare point for removal (default: (point1, point2) => point1.x === point2.x && point1.y === point2.y).
+    arePointsEqual: (point1, point2) => point1.data.foo === point2.data.foo      
 };
 
 // An array of point to insert directly (same as quadtree.insert(points) )
@@ -121,6 +123,9 @@ console.log(point.data.foo); // 'bar'
 ### Remove
 
 As the **insert** method, you can remove a **Point** element, an array of **Point** element, your **own element** as long as it has an **x** and a **y** property or an array of custom element.
+
+By default, points having the same **x** and **y** values will be removed. To override this behavior, add a method under `arePointsEqual` in the config of the quadtree that takes two points in parameters and return a boolean if the points are equal.
+Example: `const quadtree = new QuadTree(boundingArea, {arePointsEqual: (point1, point2) => point1.data.foo === point2.data.foo});` 
 
 ```javascript
 const point = new Point(10, 25);
