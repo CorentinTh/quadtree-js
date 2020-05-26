@@ -48,11 +48,8 @@ export class Circle  implements Shape{
      * @returns {boolean} - True if it intersects, otherwise false.
      */
     intersects(range: Box): boolean {
-        const Max = (a: number, b: number): number => a >= b ? a : b;
-        const Min = (a: number, b: number): number => a <= b ? a : b;
-
-        const dX = this.x - Max(range.x, Min(this.x, range.x + range.w));
-        const dY = this.y - Max(range.y, Min(this.y, range.y + range.h));
+        const dX = this.x - Math.max(range.x, Math.min(this.x, range.x + range.w));
+        const dY = this.y - Math.max(range.y, Math.min(this.y, range.y + range.h));
         return (dX * dX + dY * dY) <= (this.rPow2);
     }
 }
