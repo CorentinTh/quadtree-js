@@ -34,7 +34,7 @@ And import :
 import {QuadTree, Box, Point, Circle} from 'js-quadtree';
 // Or Common JS:
 const {QuadTree, Box, Point, Circle} = require('js-quadtree');
-
+                                   // x  y    w     h
 const quadtree = new QuadTree(new Box(0, 0, 1000, 1000));
 
 quadtree.insert(new Point(100, 200, {custom: 'data'}));
