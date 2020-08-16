@@ -78,6 +78,34 @@ describe('Class QuadTree', () => {
                 expect(allPoints).not.toContain(point);
             });
         });
+
+
+        describe('insert return value', () => {
+            test('successful insert a point should return true', () => {
+                const qt = new QuadTree(new Box(0, 0, 100, 100));
+                const result = qt.insert(new Point(5, 5));
+                expect(result).toBeTruthy();
+            })
+
+            test('successful insert an array should return true', () => {
+                const qt = new QuadTree(new Box(0, 0, 100, 100));
+                const result = qt.insert([new Point(5, 5), new Point(6, 6)]);
+                expect(result).toBeTruthy();
+            })
+
+            test('successful insert an array with limited depth and capacity should return true', () => {
+                const qt = new QuadTree(new Box(0, 0, 100, 100), {capacity: 4});
+                const result = qt.insert([
+                    new Point(1, 1),
+                    new Point(2, 2),
+                    new Point(3, 3),
+                    new Point(4, 4),
+                    new Point(5, 5)
+                ]);
+
+                expect(result).toBeTruthy();
+            })
+        })
     });
 
     describe('query Box 1', () => {

@@ -196,14 +196,17 @@ export class QuadTree {
      * @param {(Point|Object|Point[]|Object[])} pointOrArray - A point or an array of points to insert
      * @param {number} pointOrArray.x - X coordinate of the point
      * @param {number} pointOrArray.y - Y coordinate of the point
+     * @returns {boolean} true if the point or all the point has been inserted, false otherwise
      */
-    insert(pointOrArray: Point | Point[]): void {
+    insert(pointOrArray: Point | Point[]): boolean {
         if (Array.isArray(pointOrArray)) {
+            let returnValue = true;
             for (const point of pointOrArray) {
-                this.insertRecursive(point);
+                returnValue = returnValue && this.insertRecursive(point);
             }
+            return returnValue;
         } else {
-            this.insertRecursive(pointOrArray);
+            return this.insertRecursive(pointOrArray);
         }
     }
 
