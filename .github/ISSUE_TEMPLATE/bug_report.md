@@ -7,6 +7,11 @@ assignees: CorentinTh
 
 ---
 
+**Describe your environement**
+* **Environement**: node or browser
+* **Node version** (if applicable):  *ex: 12.4.0*
+* **Browser** (if applicable):  *ex: Chrome 84*
+
 **Describe the bug**
 A clear and concise description of what the bug is.
 
