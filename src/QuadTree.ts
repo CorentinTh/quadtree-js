@@ -111,7 +111,7 @@ export class QuadTree {
      */
     private divide(): void {
         const childMaximumDepth = this.config.maximumDepth === -1 ? -1 : this.config.maximumDepth - 1;
-        const childConfig = Object.assign({}, this.config, {maximumDepth: childMaximumDepth});
+        const childConfig: QuadTreeConfig = Object.assign({}, this.config, {maximumDepth: childMaximumDepth});
 
         this.isDivided = true;
 
@@ -121,10 +121,12 @@ export class QuadTree {
         const h = this.container.h / 2;
 
         // Creation of the sub-nodes, and insertion of the current point
-        this.ne = new QuadTree(new Box(x + w, y, w, h), childConfig, this.points.slice());
-        this.nw = new QuadTree(new Box(x, y, w, h), childConfig, this.points.slice());
-        this.se = new QuadTree(new Box(x + w, y + h, w, h), childConfig, this.points.slice());
-        this.sw = new QuadTree(new Box(x, y + h, w, h), childConfig, this.points.slice());
+        this.ne = new QuadTree(new Box(x + w, y, w, h), childConfig);
+        this.nw = new QuadTree(new Box(x, y, w, h), childConfig);
+        this.se = new QuadTree(new Box(x + w, y + h, w, h), childConfig);
+        this.sw = new QuadTree(new Box(x, y + h, w, h), childConfig);
+
+        this.insert(this.points.slice());
 
         // We empty this node points
         this.points.length = 0;

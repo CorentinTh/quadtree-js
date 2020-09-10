@@ -226,17 +226,31 @@ describe('Class QuadTree', () => {
 
             qt.insert(new Point(5, 5));
             qt.insert(new Point(6, 5));
+            qt.insert(new Point(7, 5));
+            qt.insert(new Point(8, 4));
+            qt.insert(new Point(9, 3));
             qt.insert(new Point(4, 5));
             qt.insert(new Point(3, 5));
             qt.insert(new Point(2, 5));
-            qt.insert(new Point(1, 5));
+            qt.insert(new Point(1, 8));
 
-            const result = {ne: 2, nw: {ne: 0, nw: 0, se: 3, sw: 2}, se: 2, sw: 3};
+            const result = {ne: {ne: 0, nw: 0, se: 2, sw:3}, nw: 3, se: 0, sw: 1};
 
             expect(qt.getTree()).toEqual(result);
         })
     });
 
+    describe('constructor:points', () => {
+        test('point array passed in constructor are inserted', () => {
+            const qt = new QuadTree(new Box(0, 0, 10, 10), {}, [
+                new Point(1, 1),
+                new Point(2, 2),
+                new Point(3, 3)
+            ]);
+
+            expect(qt.getAllPoints()).toHaveLength(3);
+        })
+    })
 
     describe('config:removeEmptyNodes', () => {
         test('with no points', () => {
@@ -302,9 +316,9 @@ describe('Class QuadTree', () => {
             qt.insert(new Point(4, 5));
             qt.insert(new Point(3, 5));
             qt.insert(new Point(2, 5));
-            qt.insert(new Point(1, 5));
+            qt.insert(new Point(1, 8));
 
-            expect(qt.getTree()).toEqual({ne: 2, nw: 5, se: 2, sw: 3});
+            expect(qt.getTree()).toEqual({ne: 2, nw: 3, se: 0, sw: 1});
         });
     });
 
