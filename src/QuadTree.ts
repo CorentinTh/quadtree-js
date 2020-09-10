@@ -1,4 +1,5 @@
-import {Box, Point} from './index';
+import {Box} from './Box';
+import {Point} from './Point';
 import {QuadTreeConfig, QuadTreeConfigComplete, Tree, Shape} from "./types";
 
 const defaultConfig: QuadTreeConfigComplete = {
