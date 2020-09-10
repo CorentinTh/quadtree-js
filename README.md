@@ -37,7 +37,7 @@ And import :
 import {QuadTree, Box, Point, Circle} from 'js-quadtree';
 // Or Common JS:
 const {QuadTree, Box, Point, Circle} = require('js-quadtree');
-                                   // x  y    w     h
+
 const quadtree = new QuadTree(new Box(0, 0, 1000, 1000));
 
 quadtree.insert(new Point(100, 200, {custom: 'data'}));
@@ -62,7 +62,7 @@ const results = quadtree.query(new QT.Circle(150, 150, 100));
 ## Usage
 ### Creation
 ```javascript
-// Create the bounding area of the quadtree
+// Create the bounding area of the quadtree (x, y, width, height)
 const boundingArea = new Box(0, 0, 1000, 1000);
 
 // Instantiate  the new quadtree
@@ -71,7 +71,7 @@ const quadtree = new QuadTree(boundingArea);
 
 You can also specify the following optional parameters:
 ```javascript
-// Create the bounding area of the quadtree
+// Create the bounding area of the quadtree (x, y, width, height)
 const boundingArea = new Box(0, 0, 1000, 1000);
 
 const config = {
@@ -157,12 +157,12 @@ Use the **query** method to get all the point within a range.
 
 
 ```javascript
-// This will return all the points in the given Box
+// This will return all the points in the given Box (x, y, width, height)
 const points = quadtree.query(new Box(10, 10, 100, 100));
 ```
 
 ```javascript
-// This will return all the points in the given Circle
+// This will return all the points in the given Circle (x, y, radius)
 const points = quadtree.query(new Circle(10, 10, 100));
 ```
 
