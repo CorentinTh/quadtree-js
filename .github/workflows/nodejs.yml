@@ -42,6 +42,7 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.NODE_VERSION }}
+          registry-url: 'https://registry.npmjs.org'
 
       - name: Install Dependencies
         run: npm ci
