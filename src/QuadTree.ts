@@ -213,7 +213,6 @@ export class QuadTree {
         }
     }
 
-
     /**
      * Insert a point in the QuadTree
      * @param {(Point|Object)} point - A point to insert
@@ -233,14 +232,13 @@ export class QuadTree {
             } else if (this.config.maximumDepth === -1 || this.config.maximumDepth > 0) {
                 this.divide();
             }
-
         }
 
         if (this.isDivided) {
-            if (this.ne.insertRecursive(point)) return true;
-            if (this.nw.insertRecursive(point)) return true;
-            if (this.se.insertRecursive(point)) return true;
-            return this.sw.insertRecursive(point);
+            return this.ne.insertRecursive(point) 
+                || this.nw.insertRecursive(point) 
+                || this.se.insertRecursive(point) 
+                || this.sw.insertRecursive(point);
         } else {
             return false;
         }
