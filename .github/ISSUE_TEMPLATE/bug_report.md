@@ -7,7 +7,7 @@ assignees: CorentinTh
 
 ---
 
-**Describe your environement** *(if applicable)*
+**Describe your environement**
 * **Environement**: node or browser
 * **Node version** (if applicable):  *ex: 12.4.0*
 * **Browser** (if applicable):  *ex: Chrome 84*
@@ -18,7 +18,9 @@ A clear and concise description of what the bug is.
 **To Reproduce**
 Steps to reproduce the behavior:
 1. Go to '...'
-2. Type command '....'
+2. Click on '....'
+3. Scroll down to '....'
+4. See error
 
 **Expected behavior**
 A clear and concise description of what you expected to happen.
