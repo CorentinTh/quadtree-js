@@ -1,6 +1,6 @@
 {
   "name": "js-quadtree",
-  "version": "3.3.3",
+  "version": "3.3.4",
   "description": "A simple quadtree implementation for javascript (nodejs or browser with module bundler).",
   "main": "dist/index.js",
   "module": "dist/index.es.js",
