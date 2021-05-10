@@ -47,6 +47,12 @@ jobs:
       - name: Install Dependencies
         run: npm ci
 
+      - name: Build changelog
+        id: build_changelog
+        uses: mikepenz/release-changelog-builder-action@{latest-release}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
       - name: Publishing to npm 
         run: npm publish
         env:
@@ -62,3 +68,4 @@ jobs:
           release_name: Release ${{ github.ref }}
           draft: false
           prerelease: ${{ contains(github.ref, 'pre') || contains(github.ref, 'alpha') || contains(github.ref, 'beta') }}
+          body: ${{ steps.build_changelog.outputs.changelog }}
