@@ -28,14 +28,14 @@
   "license": "MIT",
   "devDependencies": {
     "@rollup/plugin-typescript": "^4.1.2",
-    "@types/jest": "^25.2.3",
+    "@types/jest": "^26.0.23",
     "@typescript-eslint/eslint-plugin": "^2.34.0",
     "@typescript-eslint/parser": "^2.34.0",
     "eslint": "^6.8.0",
     "jest": "^25.5.4",
     "rollup": "^2.47.0",
     "rollup-plugin-terser": "^7.0.2",
-    "rollup-plugin-typescript2": "^0.26.0",
+    "rollup-plugin-typescript2": "^0.30.0",
     "ts-jest": "^25.5.1",
     "typescript": "^3.9.9"
   },
