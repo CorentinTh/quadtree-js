@@ -40,6 +40,8 @@ jobs:
       node_version: 12.x
     steps:
       - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
 
       - name: Use Node.js ${{ matrix.NODE_VERSION }}
         uses: actions/setup-node@v1
