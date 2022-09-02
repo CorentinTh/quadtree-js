@@ -13,7 +13,7 @@ jobs:
       - run: pnpm install
       - run: pnpm lint
       - run: pnpm build
-      - run: pnpm test
+      - run: pnpm vitest --coverage
 
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v2.0.1
