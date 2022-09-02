@@ -6,10 +6,10 @@
   "module": "dist/index.es.js",
   "browser": "dist/index.js",
   "scripts": {
-    "build": "rollup -c",
+    "build": "unbuild",
     "lint": "eslint ./src/**",
     "test": "vitest",
-    "prepare": "pnpm build"
+    "prepack": "pnpm build"
   },
   "files": [
     "/dist/"
@@ -27,16 +27,12 @@
   "author": "Corentin Th <corentin.thomasset74+npm@gmail.com> (https://github.com/CorentinTh)",
   "license": "MIT",
   "devDependencies": {
-    "@rollup/plugin-typescript": "^8.2.1",
-    "@types/jest": "^26.0.23",
     "@typescript-eslint/eslint-plugin": "^2.34.0",
     "@typescript-eslint/parser": "^2.34.0",
     "@vitest/coverage-c8": "^0.22.1",
     "eslint": "^6.8.0",
-    "rollup": "^2.47.0",
-    "rollup-plugin-terser": "^7.0.2",
-    "rollup-plugin-typescript2": "^0.30.0",
     "typescript": "^3.9.9",
+    "unbuild": "^0.8.10",
     "vitest": "^0.22.1"
   }
 }
