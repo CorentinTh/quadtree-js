@@ -9,7 +9,7 @@
     "build": "rollup -c",
     "lint": "eslint ./src/**",
     "test": "jest",
-    "prepare": "npm run build"
+    "prepare": "pnpm build"
   },
   "files": [
     "/dist/"
